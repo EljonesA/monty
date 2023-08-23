@@ -42,13 +42,15 @@ int main(int argc, char *argv[])
 		if (strcmp(opcode, "push") == 0)
 		{
 			char *arg = strtok(NULL, "\t\n");
+			int integer;
+
 			if (arg == NULL)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
 			}
 
-			int integer = atoi(arg);
+			integer = atoi(arg);
 			if (integer == 0 && arg[0] != '0')
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
