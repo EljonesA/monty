@@ -9,13 +9,17 @@
  */
 int main(int argc, char *argv[])
 {
+	FILE *file = fopen(argv[1], "r");
+	char *line = NULL;
+	size_t len = 0;
+	int line_number = 0;
+	char *opcode;
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
-	FILE *file = fopen(argv[1], "r");
 
 	if (file == NULL)
 	{
@@ -23,14 +27,10 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	char *line = NULL;
-	size_t len = 0;
-	int line_number = 0;
-
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++; /* make line_number 1 to indicate first line */
-		char *opcode = strtok(line, "\t\n");
+		opcode = strtok(line, "\t\n");
 
 		if (opcode == NULL || opcode[0] == '\n' || opcode[0] == '#')
 		{

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/types.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -26,13 +27,14 @@ typedef struct stack_s
  * @opcode: the opcode
  * @f: function to handle the opcode
  *
- * Description: opcode and its function
- * for stack, queue, LIFO, FIFO
+ * Description: Opcode and its function for stack, queue, LIFO, FIFO
  */
 typedef struct instruction_s
 {
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 
 #endif /* MONTY_H */
