@@ -15,6 +15,13 @@ int main(int argc, char *argv[])
 	int line_number = 0;
 	char *opcode;
 	stack_t *top = NULL; /* the stack */
+	int found;
+	char *arg;
+	size_t i;
+	instruction_t instructions[] = {
+		{"push", push},
+		{"pall", pall}
+	};
 
 	if (argc != 2)
 	{
@@ -38,31 +45,24 @@ int main(int argc, char *argv[])
 			continue; /* ignore empty\blank lines, comments */
 		}
 
-		if (strcmp(opcode, "push") == 0)
+		found = 0;
+		for (i = 0; i < sizeof(instructions) / sizeof(instructions[0]); i++)
 		{
-			char *arg = strtok(NULL, "\t\n");
-			int integer;
-
-			if (arg == NULL)
+			if (strcmp(opcode, instructions[i].opcode) == 0)
 			{
-				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				exit(EXIT_FAILURE);
+				arg = strtok(NULL, " \t\n");
+				if (arg == NULL && strcmp(opcode, "push") == 0)
+				{
+					fprintf(stderr, "L%d: usage: push integer\n", line_number);
+					exit(EXIT_FAILURE);
+				}
+				instructions[i].f(&top, line_number);
+				found = 1;
+				break;
 			}
-
-			integer = atoi(arg);
-			if (integer == 0 && arg[0] != '0')
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				exit(EXIT_FAILURE);
-			}
-
-			push(&top, integer);
 		}
-		else if (strcmp(opcode, "pall") == 0)
-		{
-			pall(&top);
-		}
-		else
+
+		if (!found)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 			exit(EXIT_FAILURE);

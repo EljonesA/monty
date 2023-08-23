@@ -7,7 +7,7 @@
  *
  * Return: void.
  */
-void push(stack_t **top, int data)
+void push(stack_t **top, unsigned int data)
 {
 	/* Create and initialize new node to push to the stack */
 	stack_t *new_node = malloc(sizeof(stack_t));
@@ -36,12 +36,14 @@ void push(stack_t **top, int data)
 /**
  * pall - function to print all elements of a stack
  * @top: pointer to the top of the stack
+ * @line_number: line number
  *
  * Return: void.
  */
-void pall(stack_t **top)
+void pall(stack_t **top, unsigned int line_number)
 {
 	stack_t *current_node = *top;
+	(void)line_number;
 
 	/* handle empty stack */
 	if (*top == NULL)

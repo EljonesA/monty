@@ -36,7 +36,7 @@ typedef struct instruction_s
 } instruction_t;
 
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
-void push(stack_t **top, int data);
-void pall(stack_t **top);
+void push(stack_t **top, unsigned int data);
+void pall(stack_t **top, unsigned int line_number);
 
 #endif /* MONTY_H */
