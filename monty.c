@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
 	instruction_t instructions[] = {
 		{"push", push},
 		{"pall", pall},
-		{"pop", pop}
+		{"pop", pop},
+		{"add", add}
 	};
 
 	if (argc != 2)
@@ -57,6 +58,12 @@ int main(int argc, char *argv[])
 					fprintf(stderr, "L%d: usage: push integer\n", line_number);
 					exit(EXIT_FAILURE);
 				}
+				if (arg == NULL && strcmp(opcode, "pop") == 0)
+				{
+					fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+					exit(EXIT_FAILURE);
+				}
+				
 				instructions[i].f(&top, line_number);
 				found = 1;
 				break;
