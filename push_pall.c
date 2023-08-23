@@ -10,7 +10,7 @@
 void push(stack_t **top, int data)
 {
 	/* Create and initialize new node to push to the stack */
-	stack_t *new_node = malloc(sizeof(stack_t ));
+	stack_t *new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL) /* check memory allocation */
 		exit(EXIT_FAILURE);
