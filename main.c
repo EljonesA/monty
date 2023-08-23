@@ -31,13 +31,12 @@ int main(int argc, char *argv[])
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++; /* make line_number 1 to indicate first line */
-		opcode = strtok(line, " \t\n");
+		opcode = strtok(line, " \t\n$");
 
 		if (opcode == NULL || opcode[0] == '\n' || opcode[0] == '#')
 		{
 			continue; /* ignore empty\blank lines, comments */
 		}
-		printf("Token: %s\n", opcode);
 
 		if (strcmp(opcode, "push") == 0)
 		{
