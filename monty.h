@@ -41,7 +41,7 @@ typedef struct externVariable_s
 	char *arg;
 	FILE *file;
 	int data;
-	int lifi;
+	int unknown;
 }  externVariable_t;
 extern externVariable_t variables;
 int execute(char* data, stack_t **top, unsigned int line_number, FILE *file);

@@ -36,6 +36,11 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
 				free(data);
 				exit(EXIT_FAILURE);
 			}
+			if (arg == NULL && strcmp(op, "pop") == 0)
+			{
+				fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+				exit(EXIT_FAILURE);
+			}
 			variables.arg = arg;
 			variables.data = atoi(arg);
 			instructions[i].f(top, line_number);
@@ -43,7 +48,7 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
 			break;
 		}
 	}
-	if (!found)
+	if (!found  || instructions[i].opcode == NULL)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, op);
 		exit(EXIT_FAILURE);
