@@ -41,7 +41,7 @@ typedef struct externVariable_s
 	char *arg;
 	FILE *file;
 	int data;
-	int unknown;
+	int flag;
 }  externVariable_t;
 extern externVariable_t variables;
 int execute(char* data, stack_t **top, unsigned int line_number, FILE *file);
@@ -52,6 +52,10 @@ void pint(stack_t **top, unsigned int line_number);
 void swap(stack_t **top, unsigned int line_number);
 void pop(stack_t **top, unsigned int line_number);
 void add(stack_t **top, unsigned int line_number);
+void div_stack(stack_t **top, unsigned int line_number);
+void mod(stack_t **top, unsigned int line_number);
+void mul(stack_t **top, unsigned int line_number);
+void sub(stack_t **top, unsigned int line_number);
 void nop(stack_t **top, unsigned int line_number);
 void free_stack(stack_t *top);
 
