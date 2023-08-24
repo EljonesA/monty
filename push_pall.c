@@ -14,6 +14,7 @@ void push(stack_t **top, unsigned int data)
 	if (new_node == NULL) /* check memory allocation */
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		free_stack(*top);
 		exit(EXIT_FAILURE);
 	}
 

@@ -7,20 +7,20 @@
  *
  * Return: void.
  */
+
 void pop(stack_t **top, unsigned int line_number)
 {
-	stack_t *temp;
+	stack_t *temp = *top;
+    if (*top == NULL)
+    {
+        fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+        exit(EXIT_FAILURE); 
+    }
 
-	if (*top == NULL)
-	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	temp = *top;
-	*top = temp->next;
-	if (*top != NULL)
-	{
-		(*top)->prev = NULL;
-	}
-	free(temp);
+   
+    *top = (*top)->next;
+    if (*top)
+        (*top)->prev = NULL;
+    free(temp);
 }
+

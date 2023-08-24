@@ -1,4 +1,6 @@
+#define _GNU_SOURCE
 #include "monty.h"
+
  externVariable_t variables = {NULL, NULL, 0, 0};
 /**
  * main - runs the monty program
@@ -12,7 +14,7 @@ int main(int argc, char *argv[])
 	FILE *file;
 	char *line = NULL;
 	size_t len = 0;
-	int line_number = 0;
+	unsigned  line_number = 0;
 	stack_t *top = NULL; /* the stack */
 	
 	if (argc != 2)
