@@ -1,9 +1,5 @@
 #include "monty.h"
-/**
- * sum_dlistint - sum all the elememt in the list
- * @head: parameter
- * Return: summ all of the data
- */
+
 /**
  * add - adds the top two elements of the stack
  * @top: pointer to top of the stack
@@ -13,16 +9,14 @@
  */
 void add(stack_t **top, unsigned int line_number)
 {
-    int sum;
+	int sum;
 
-    if (*top == NULL || (*top)->next == NULL)
-    {
-        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-        exit(EXIT_FAILURE);
-    }
-
-    sum = (*top)->n + (*top)->next->n;
-
-    pop(top, line_number);
-    (*top)->n = sum; 
+	if (*top == NULL || (*top)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	sum = (*top)->n + (*top)->next->n;
+	pop(top, line_number);
+	(*top)->n = sum;
 }

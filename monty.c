@@ -9,20 +9,23 @@
  */
 int main(int argc, char *argv[])
 {
-	FILE *file = fopen(argv[1], "r");
+	FILE *file;
 	char *line = NULL;
 	size_t len = 0;
 	int line_number = 0;
 	char *opcode;
 	stack_t *top = NULL; /* the stack */
-	int found;
+	int i = 0;
 	char *arg;
-	size_t i;
 	instruction_t instructions[] = {
 		{"push", push},
 		{"pall", pall},
+		{"pint", pint},
 		{"pop", pop},
-		{"add", add}
+		{"swap", swap},
+		{"add", add},
+		{"nop", nop},
+		{NULL, NULL}
 	};
 
 	if (argc != 2)
@@ -31,6 +34,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
+	file = fopen(argv[1], "r");
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
@@ -47,32 +51,27 @@ int main(int argc, char *argv[])
 			continue; /* ignore empty\blank lines, comments */
 		}
 
-		found = 0;
-		for (i = 0; i < sizeof(instructions) / sizeof(instructions[0]); i++)
+		/* tokenize arguments if needed */
+		arg = strtok(NULL, " \t\n");
+		if (strcmp(opcode, "push") == 0 && arg == NULL)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+
+		while (instructions[i].opcode != NULL)
 		{
 			if (strcmp(opcode, instructions[i].opcode) == 0)
 			{
-				arg = strtok(NULL, " \t\n");
-				if (arg == NULL && strcmp(opcode, "push") == 0)
-				{
-					fprintf(stderr, "L%d: usage: push integer\n", line_number);
-					exit(EXIT_FAILURE);
-				}
-				if (arg == NULL && strcmp(opcode, "pop") == 0)
-				{
-					fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-					exit(EXIT_FAILURE);
-				}
-				
 				instructions[i].f(&top, line_number);
-				found = 1;
 				break;
 			}
+			i++;
 		}
 
-		if (!found)
+		if (instructions[i].opcode == NULL)
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+			fprintf(stderr, "L%d: unknown instructions %s\n", line_number, opcode);
 			exit(EXIT_FAILURE);
 		}
 	}

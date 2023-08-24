@@ -13,7 +13,10 @@ void push(stack_t **top, unsigned int data)
 	stack_t *new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL) /* check memory allocation */
+	{
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
+	}
 
 	new_node->prev = NULL;
 	new_node->n = data;
@@ -43,11 +46,11 @@ void push(stack_t **top, unsigned int data)
 void pall(stack_t **top, unsigned int line_number)
 {
 	stack_t *current_node = *top;
-	(void)line_number;
 
+	(void)line_number; /* unused parameter */
 	/* handle empty stack */
 	if (*top == NULL)
-		exit(EXIT_FAILURE);
+		return;
 
 	/* traverse the stack printing value of the curent node each time */
 	while (current_node != NULL)
