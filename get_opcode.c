@@ -14,7 +14,6 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
 		{"pop", pop},
 		{"add", add},
 		{"swap", swap},
-		{"add", add},
 		{"nop", nop},
 		{NULL, NULL}
 	};
