@@ -1,9 +1,5 @@
 #include "monty.h"
-/**
- * sum_dlistint - sum all the elememt in the list
- * @head: parameter
- * Return: summ all of the data
- */
+
 /**
  * add - adds the top two elements of the stack
  * @top: pointer to top of the stack
@@ -13,7 +9,7 @@
  */
 void add(stack_t **top, unsigned int line_number)
 {
-    int sum;
+	int sum;
 
     if (*top == NULL || (*top)->next == NULL)
     {
