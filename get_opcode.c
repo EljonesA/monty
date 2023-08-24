@@ -1,5 +1,13 @@
 #include "monty.h"
 
+/**
+ * execute - finds the function matching the opcode
+ * @top: pointer to the node
+ * @data: command line
+ * @file: file to open
+ * @line_number: line number of the command line in the file
+ */
+
 int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
 {
     size_t i;
@@ -37,13 +45,13 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
                 }
                 variables.data = atoi(arg);
                 push(top, variables.data);  
-                return 1;
+                return (1);
             }
             else
             {
                 variables.arg = arg;
                 instructions[i].f(top, line_number);
-                return 1;
+                return (1);
             }
         }
     }
