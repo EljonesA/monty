@@ -1,5 +1,5 @@
 #include "monty.h"
-
+ externVariable_t variables = {NULL, NULL, 0, 0};
 /**
  * main - runs the monty program
  * @argc: argument count
@@ -13,23 +13,15 @@ int main(int argc, char *argv[])
 	char *line = NULL;
 	size_t len = 0;
 	int line_number = 0;
-	char *opcode;
 	stack_t *top = NULL; /* the stack */
-	int found;
-	char *arg;
-	size_t i;
-	instruction_t instructions[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pop", pop},
-		{"add", add}
-	};
+	
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
+	variables.file = file;
 
 	if (file == NULL)
 	{
@@ -40,45 +32,14 @@ int main(int argc, char *argv[])
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++; /* make line_number 1 to indicate first line */
-		opcode = strtok(line, " \t\n$");
 
-		if (opcode == NULL || opcode[0] == '\n' || opcode[0] == '#')
-		{
-			continue; /* ignore empty\blank lines, comments */
-		}
-
-		found = 0;
-		for (i = 0; i < sizeof(instructions) / sizeof(instructions[0]); i++)
-		{
-			if (strcmp(opcode, instructions[i].opcode) == 0)
-			{
-				arg = strtok(NULL, " \t\n");
-				if (arg == NULL && strcmp(opcode, "push") == 0)
-				{
-					fprintf(stderr, "L%d: usage: push integer\n", line_number);
-					exit(EXIT_FAILURE);
-				}
-				if (arg == NULL && strcmp(opcode, "pop") == 0)
-				{
-					fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-					exit(EXIT_FAILURE);
-				}
-				
-				instructions[i].f(&top, line_number);
-				found = 1;
-				break;
-			}
-		}
-
-		if (!found)
-		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-			exit(EXIT_FAILURE);
-		}
+		execute(line, &top, line_number, file);
 	}
 
 	fclose(file);
 	free(line);
+	
+	free_stack(top);
 
 	return (0);
 }

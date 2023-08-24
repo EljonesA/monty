@@ -35,10 +35,19 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+typedef struct externVariable_s
+{
+	char *arg;
+	FILE *file;
+	int data;
+	int lifi;
+}  externVariable_t;
+extern externVariable_t variables;
+int execute(char* data, stack_t **top, unsigned int line_number, FILE *file);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 void push(stack_t **top, unsigned int data);
-void pall(stack_t **top, unsigned int line_number);
-void pop(stack_t **top, unsigned int line_number);
-void add(stack_t **top, unsigned int line_number);
-
+void pall(stack_t **top, unsigned int data);
+void pop(stack_t **top, unsigned int value);
+void add(stack_t **top, unsigned int data);
+void free_stack(stack_t *top);
 #endif /* MONTY_H */

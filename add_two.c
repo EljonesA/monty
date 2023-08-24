@@ -23,6 +23,6 @@ void add(stack_t **top, unsigned int line_number)
 
     sum = (*top)->n + (*top)->next->n;
 
-    pop(top, line_number);
+    pop(top,line_number);
     (*top)->n = sum; 
 }
