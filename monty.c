@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
 	int line_number = 0;
 	stack_t *top = NULL; /* the stack */
 	
-
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -33,14 +32,10 @@ int main(int argc, char *argv[])
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++; /* make line_number 1 to indicate first line */
-
 		execute(line, &top, line_number, file);
 	}
-
 	fclose(file);
 	free(line);
-	
 	free_stack(top);
-
 	return (0);
 }
