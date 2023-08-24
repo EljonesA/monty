@@ -53,5 +53,7 @@ void swap(stack_t **top, unsigned int line_number);
 void pop(stack_t **top, unsigned int line_number);
 void add(stack_t **top, unsigned int line_number);
 void nop(stack_t **top, unsigned int line_number);
+void free_stack(stack_t *top);
+
 
 #endif /* MONTY_H */
