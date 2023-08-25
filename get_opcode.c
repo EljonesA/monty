@@ -6,20 +6,15 @@
  * @file: file to open
  * @line_number: line number of the command line in the file
  */
-
 int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
 {
     size_t i;
     
     instruction_t instructions[] = {
-        {"push", push},
-        {"pall", pall},
-        {"pint", pint},
-        {"pop", pop},
-        {"add", add},
-        {"swap", swap},
-        {"nop", nop},
-        {NULL, NULL}
+        {"push", push}, {"pall", pall}, {"pint", pint},
+		{"pop", pop}, {"add", add}, {"swap", swap},
+        {"nop", nop}, {"sub", sub}, {"mod", mod},
+        {"mul", mul}, {"div", div_stack}, {NULL, NULL}
     };
 
     char *op = strtok(data, " \t\n$");
@@ -27,7 +22,6 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
     {
         return 1;
     }
-
     for (i = 0; instructions[i].opcode != NULL; i++)
     {
         if (strcmp(op, instructions[i].opcode) == 0)
@@ -55,7 +49,6 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
             }
         }
     }
-
     fprintf(stderr, "L%d: unknown instruction %s\n", line_number, op);
     exit(EXIT_FAILURE);
 }

@@ -3,12 +3,12 @@
 void free_stack(stack_t *top)
 {
     stack_t *current = top;
-    stack_t *next;
+    stack_t *cur;
 
     while (current != NULL)
     {
-        next = current->prev; 
+        cur = current->prev; 
         free(current);       
-        current = next;       
+        current = cur;       
     }
 }
