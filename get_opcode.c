@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * execute - finds the function matching the opcode
  * @top: pointer to the node
@@ -10,7 +9,7 @@
 int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
 {
     size_t i;
-
+    
     instruction_t instructions[] = {
         {"push", push}, {"pall", pall}, {"pint", pint},
 		{"pop", pop}, {"add", add}, {"swap", swap},
