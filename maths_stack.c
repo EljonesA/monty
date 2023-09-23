@@ -11,14 +11,13 @@
 void add(stack_t **top, unsigned int line_number)
 {
 	int sum;
-
     if (*top == NULL || (*top)->next == NULL)
     {
-        fprintf(stderr, "L%d: can't add, %s too short\n", line_number );
+        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
         exit(EXIT_FAILURE);
     }
     sum = (*top)->n + (*top)->next->n;
-    (*top)->n = sum; 
+    (*top)->n = sum;
 }
 /**
  * sub - subs the top highest element from the second highest elements of the stack
