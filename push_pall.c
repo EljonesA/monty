@@ -9,7 +9,7 @@
  */
 void push(stack_t **top, unsigned int data)
 {
-    stack_t *new_node = malloc(sizeof(stack_t));
+    stack_t  *tail, *new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL) /* check memory allocation */
 	{
@@ -22,16 +22,29 @@ void push(stack_t **top, unsigned int data)
     new_node->n = data;
     new_node->next = NULL;
 
-    if (*top == NULL)
-    {
-        new_node->prev = NULL;
-        *top = new_node;
-    }
-    else
-    {
-        (*top)->next = new_node;
-        new_node->prev = *top;
-        *top = new_node;
+    if (is_queue) {
+        /* Queue operation: Add to the back (tail) of the queue */
+        if (*top == NULL) {
+            /* If queue is empty, set new_node as both front and back */
+            *top = new_node;
+        } else {
+            tail = *top;
+            while (tail->next != NULL) {
+                tail = tail->next;
+            }
+            tail->next = new_node;
+            new_node->prev = tail;
+        }
+    } else {
+        /* Stack operation: Add to the top of the stack */
+        if (*top == NULL) {
+            /* If stack is empty, set new_node as the top */
+            *top = new_node;
+        } else {
+            (*top)->next = new_node;
+            new_node->prev = *top;
+            *top = new_node;
+        }
     }
 
 }

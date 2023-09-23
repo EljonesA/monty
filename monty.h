@@ -8,7 +8,7 @@
 #include <ctype.h>
 
 extern char *flag;
-int is_queue = 0;
+int is_queue;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
