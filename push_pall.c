@@ -22,18 +22,30 @@ void push(stack_t **top, unsigned int data)
     new_node->n = data;
     new_node->next = NULL;
 
-    if (*top == NULL)
-    {
-        new_node->prev = NULL;
-        *top = new_node;
+    if (is_queue) {
+        /* Queue operation: Add to the back (tail) of the queue */
+        if (*top == NULL) {
+            /* If queue is empty, set new_node as both front and back */
+            *top = new_node;
+        } else {
+            stack_t *tail = *top;
+            while (tail->next != NULL) {
+                tail = tail->next;
+            }
+            tail->next = new_node;
+            new_node->prev = tail;
+        }
+    } else {
+        /* Stack operation: Add to the top of the stack */
+        if (*top == NULL) {
+            /* If stack is empty, set new_node as the top */
+            *top = new_node;
+        } else {
+            (*top)->next = new_node;
+            new_node->prev = *top;
+            *top = new_node;
+        }
     }
-    else
-    {
-        (*top)->next = new_node;
-        new_node->prev = *top;
-        *top = new_node;
-    }
-
 }
 
 /**
@@ -54,6 +66,7 @@ void pall(stack_t **top, unsigned int line_number)
 
 	/* traverse the stack printing value of the curent node each time */
 	if (is_queue) {
+		
         /* Print elements as a queue (from front to back) */
         current_node = *top;
         while (current_node->next != NULL) {
@@ -62,6 +75,8 @@ void pall(stack_t **top, unsigned int line_number)
         }
         printf("%d\n", current_node->n);
     } else {
+		
+
         /* Print elements as a stack (from top to bottom) */
         current_node = *top;
         while (current_node != NULL) {
