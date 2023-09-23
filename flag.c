@@ -6,12 +6,15 @@ void queue(stack_t **h, unsigned int l)
 {
     (void)h;
     (void)l;
-    is_queue = 1;  // Set to queue mode
+    is_queue = 1;  
+    printf("queue mode");
 }
 
 void stack(stack_t **h, unsigned int l)
 {
     (void)h;
     (void)l;
-    is_queue = 0;  // Set to stack mode
+    is_queue = 0;  
+    printf("queue mode");
+
 }

@@ -8,7 +8,15 @@
 #include <ctype.h>
 
 extern char *flag;
+typedef enum {
+    MODE_STACK,
+    MODE_QUEUE
+} Mode;
 
+// Initialize the mode to stack (LIFO)
+Mode current_mode = MODE_STACK;
+
+int is_queue = 0;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer

@@ -9,7 +9,7 @@
 int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
 {
     size_t i;
-    
+
     instruction_t instructions[] = {
         {"push", push}, {"pall", pall}, {"pint", pint},
 		{"pop", pop}, {"add", add}, {"swap", swap},
@@ -28,6 +28,7 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
         if (strcmp(op, instructions[i].opcode) == 0)
         {
             char *arg = strtok(NULL, " \t\n");
+            
             if (strcmp(op, "push") == 0)
             {
                 if (arg == NULL)
@@ -48,6 +49,7 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
                 instructions[i].f(top, line_number);
                 return (1);
             }
+            
 			
         }
 	}
