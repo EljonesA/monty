@@ -41,15 +41,17 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
                 variables.data = atoi(arg);
                 push(top, variables.data);  
                 return (1);
-            }
+			}         
             else
             {
                 variables.arg = arg;
                 instructions[i].f(top, line_number);
                 return (1);
             }
+			
         }
-    }
+	}
+	  
     fprintf(stderr, "L%d: unknown instruction %s\n", line_number, op);
     exit(EXIT_FAILURE);
 }

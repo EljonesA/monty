@@ -59,5 +59,7 @@ void sub(stack_t **top, unsigned int line_number);
 void nop(stack_t **top, unsigned int line_number);
 void free_stack(stack_t *top);
 
+void print_stack(stack_t *top);
+
 
 #endif /* MONTY_H */

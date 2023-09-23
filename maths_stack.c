@@ -17,7 +17,6 @@ void add(stack_t **top, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
     sum = (*top)->n + (*top)->next->n;
-    pop(top,line_number);
     (*top)->n = sum; 
 }
 /**
