@@ -9,7 +9,7 @@
  */
 void push(stack_t **top, unsigned int data)
 {
-    stack_t  *tail, *new_node = malloc(sizeof(stack_t));
+    stack_t *new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL) /* check memory allocation */
 	{
@@ -22,29 +22,16 @@ void push(stack_t **top, unsigned int data)
     new_node->n = data;
     new_node->next = NULL;
 
-    if (is_queue) {
-        /* Queue operation: Add to the back (tail) of the queue */
-        if (*top == NULL) {
-            /* If queue is empty, set new_node as both front and back */
-            *top = new_node;
-        } else {
-            tail = *top;
-            while (tail->next != NULL) {
-                tail = tail->next;
-            }
-            tail->next = new_node;
-            new_node->prev = tail;
-        }
-    } else {
-        /* Stack operation: Add to the top of the stack */
-        if (*top == NULL) {
-            /* If stack is empty, set new_node as the top */
-            *top = new_node;
-        } else {
-            (*top)->next = new_node;
-            new_node->prev = *top;
-            *top = new_node;
-        }
+    if (*top == NULL)
+    {
+        new_node->prev = NULL;
+        *top = new_node;
+    }
+    else
+    {
+        (*top)->next = new_node;
+        new_node->prev = *top;
+        *top = new_node;
     }
 
 }
@@ -66,9 +53,20 @@ void pall(stack_t **top, unsigned int line_number)
 		return;
 
 	/* traverse the stack printing value of the curent node each time */
-	while (current_node != NULL)
-	{
-		printf("%d\n", current_node->n);
-		current_node = current_node->prev;
-	}
+	if (is_queue) {
+        /* Print elements as a queue (from front to back) */
+        current_node = *top;
+        while (current_node->next != NULL) {
+            printf("%d\n", current_node->n);
+            current_node = current_node->next;
+        }
+        printf("%d\n", current_node->n);
+    } else {
+        /* Print elements as a stack (from top to bottom) */
+        current_node = *top;
+        while (current_node != NULL) {
+            printf("%d\n", current_node->n);
+            current_node = current_node->prev;
+        }
+    }
 }
