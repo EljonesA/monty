@@ -53,9 +53,20 @@ void pall(stack_t **top, unsigned int line_number)
 		return;
 
 	/* traverse the stack printing value of the curent node each time */
-	while (current_node != NULL)
-	{
-		printf("%d\n", current_node->n);
-		current_node = current_node->prev;
-	}
+	if (is_queue) {
+        /* Print elements as a queue (from front to back) */
+        current_node = *top;
+        while (current_node->next != NULL) {
+            printf("%d\n", current_node->n);
+            current_node = current_node->next;
+        }
+        printf("%d\n", current_node->n);
+    } else {
+        /* Print elements as a stack (from top to bottom) */
+        current_node = *top;
+        while (current_node != NULL) {
+            printf("%d\n", current_node->n);
+            current_node = current_node->prev;
+        }
+    }
 }
