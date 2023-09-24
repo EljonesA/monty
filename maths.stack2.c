@@ -66,7 +66,7 @@ void mul(stack_t **top, unsigned int line_number)
 
     mul = (*top)->n - (*top)->next->n;
 
-    pop(top, line_number);
+  
     (*top)->n = mul; 
 }
 /**
@@ -88,6 +88,6 @@ void mod(stack_t **top, unsigned int line_number)
 
     mul = (*top)->n - (*top)->next->n;
 
-    pop(top, line_number);
+    
     (*top)->n = mul; 
 }

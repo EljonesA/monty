@@ -14,7 +14,8 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
         {"push", push}, {"pall", pall}, {"pint", pint},
 		{"pop", pop}, {"add", add}, {"swap", swap},
         {"nop", nop}, {"sub", sub}, {"mod", mod},
-        {"mul", mul}, {"div", div_stack}, {NULL, NULL}
+        {"mul", mul}, {"div", div_stack}, 
+        {"queue", queue}, {"stack", stack}, {NULL, NULL}
     };
 
     char *op = strtok(data, " \t\n$");
@@ -40,15 +41,17 @@ int execute(char *data, stack_t **top, unsigned int line_number, FILE *file)
                 variables.data = atoi(arg);
                 push(top, variables.data);  
                 return (1);
-            }
+			}         
             else
             {
                 variables.arg = arg;
                 instructions[i].f(top, line_number);
                 return (1);
             }
+			
         }
-    }
+	}
+	  
     fprintf(stderr, "L%d: unknown instruction %s\n", line_number, op);
     exit(EXIT_FAILURE);
 }

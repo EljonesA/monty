@@ -7,6 +7,8 @@
 #include <sys/types.h>
 #include <ctype.h>
 
+extern char *flag;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -57,7 +59,11 @@ void mod(stack_t **top, unsigned int line_number);
 void mul(stack_t **top, unsigned int line_number);
 void sub(stack_t **top, unsigned int line_number);
 void nop(stack_t **top, unsigned int line_number);
+void queue(stack_t **h, unsigned int l)
+void stack(stack_t **h, unsigned int l)
 void free_stack(stack_t *top);
+
+void print_stack(stack_t *top);
 
 
 #endif /* MONTY_H */
