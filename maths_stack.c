@@ -7,13 +7,13 @@
  *
  * Return: void.
  */
+
 void add(stack_t **top, unsigned int line_number)
 {
 	int m = 0;
 	stack_t *aux = NULL;
 
 	aux = *top;
-	printf("%p", (void*)*top);
 
 	for (; aux != NULL; aux = aux->next, m++)
 		;
