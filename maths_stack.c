@@ -10,23 +10,14 @@
 
 void add(stack_t **top, unsigned int line_number)
 {
-	int m = 0;
-	stack_t *aux = NULL;
-
-	aux = *top;
-
-	for (; aux != NULL; aux = aux->next, m++)
-		;
-
-	if (m < 2)
-	{
-		fprintf(stderr,"L%u: can't add, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	aux = (*top)->next;
-	aux->n += (*top)->n;
-	pop(top, line_number);
+	int sum;
+    if (*top == NULL || (*top)->next == NULL)
+    {
+        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+    sum = (*top)->n + (*top)->next->n;
+    (*top)->n = sum;
 }
 /**
  * sub - subs the top highest element from the second highest elements of the stack

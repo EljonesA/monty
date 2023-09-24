@@ -39,7 +39,8 @@ void push(stack_t **top, unsigned int data)
         /* Stack operation: Add to the top of the stack */
         if (*top == NULL) {
             /* If stack is empty, set new_node as the top */
-            *top = new_node;
+             new_node->prev = NULL;
+        	 *top = new_node;
         } else {
             (*top)->next = new_node;
             new_node->prev = *top;
@@ -85,3 +86,4 @@ void pall(stack_t **top, unsigned int line_number)
         }
     }
 }
+
