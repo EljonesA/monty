@@ -8,14 +8,6 @@
 #include <ctype.h>
 
 extern char *flag;
-typedef enum {
-    MODE_STACK,
-    MODE_QUEUE
-} Mode;
-
-// Initialize the mode to stack (LIFO)
-Mode current_mode = MODE_STACK;
-
 int is_queue = 0;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -67,8 +59,8 @@ void mod(stack_t **top, unsigned int line_number);
 void mul(stack_t **top, unsigned int line_number);
 void sub(stack_t **top, unsigned int line_number);
 void nop(stack_t **top, unsigned int line_number);
-void queue(stack_t **h, unsigned int l)
-void stack(stack_t **h, unsigned int l)
+void queue(stack_t **h, unsigned int l);
+void stack(stack_t **h, unsigned int l);
 void free_stack(stack_t *top);
 
 void print_stack(stack_t *top);
